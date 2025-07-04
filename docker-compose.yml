@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=twitter_db
+      - POSTGRES_USER=twitter_user
+      - POSTGRES_PASSWORD=os.environ.get('POSTGRES_PASSWORD') # Mude isso em produção
+
+  web:
+    build: .
+    command: gunicorn twitter.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - DEBUG=1
+      - DB_HOST=db
+      - DB_NAME=twitter_db
+      - DB_USER=twitter_user
+      - DB_PASS=os.environ.get('POSTGRES_PASSWORD') # Mude isso em produção
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
+
+env_file:
+  - .env

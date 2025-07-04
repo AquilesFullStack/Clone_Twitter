@@ -1,0 +1,35 @@
+# Arquivos de Ambiente
+.env
+.env.*
+
+# Banco de dados
+db.sqlite3
+db.sqlite3-journal
+
+# Arquivos de cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Arquivos de cache e de IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Dependências e ambientes virtuais
+env/
+venv/
+.venv/
+
+# Relatórios de teste e cobertura
+.coverage
+.cache
+.pytest_cache/
+htmlcov/
+
+# Logs
+*.log
+
+# Dados de extração do Docker
+postgres_data/
+
